@@ -38,6 +38,9 @@ if [ ! -z "$(grep ^admin: /etc/group)" ] && [ -z "$1" ]; then
     exit 1
 fi
 
+# GitHub Repo URL
+EGITHUB='https://raw.githubusercontent.com/epiksel/vesta/master'
+
 # Detect OS
 case $(head -n1 /etc/issue | cut -f 1 -d ' ') in
     Debian)     type="debian" ;;
@@ -48,7 +51,7 @@ esac
 
 # Check wget
 if [ -e '/usr/bin/wget' ]; then
-    wget http://vestacp.com/pub/vst-install-$type.sh -O vst-install-$type.sh
+    wget $EGITHUB/install/vst-install-$type.sh -O vst-install-$type.sh
     if [ "$?" -eq '0' ]; then
         bash vst-install-$type.sh $*
         exit
@@ -60,7 +63,7 @@ fi
 
 # Check curl
 if [ -e '/usr/bin/curl' ]; then
-    curl -O http://vestacp.com/pub/vst-install-$type.sh
+    curl -O $EGITHUB/install/vst-install-$type.sh
     if [ "$?" -eq '0' ]; then
         bash vst-install-$type.sh $*
         exit

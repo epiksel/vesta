@@ -1,0 +1,6 @@
+[vesta]
+name=Vesta - cmmnt
+baseurl=https://r.vestacp.com/cmmnt/$releasever/$basearch/
+enabled=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-VESTA
+gpgcheck=1

@@ -1,0 +1,5 @@
+[nginx]
+name=nginx repo
+baseurl=https://nginx.org/packages/centos/$releasever/$basearch/
+enabled=1
+gpgcheck=0
