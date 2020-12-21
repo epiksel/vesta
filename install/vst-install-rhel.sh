@@ -84,6 +84,9 @@ gen_pass() {
     echo "$PASS"
 }
 
+# Defining 32 char blowfish_secret
+blowfish_secret=`openssl rand -base64 32`;
+
 # Defining return code check function
 check_result() {
     if [ $1 -ne 0 ]; then
@@ -434,8 +437,8 @@ sleep 5
 #----------------------------------------------------------#
 
 # Checking swap on small instances
-if [ -z "$(swapon -s)" ] && [ $memory -lt 1000000 ]; then
-    fallocate -l 1G /swapfile
+if [ -z "$(swapon -s)" ] && [ $memory -lt 3000000 ]; then
+    fallocate -l 2G /swapfile
     chmod 600 /swapfile
     mkswap /swapfile
     swapon /swapfile
@@ -1046,7 +1049,7 @@ if [ "$mysql" = 'yes' ]; then
     mysql -e "GRANT ALL ON phpmyadmin.*
         TO phpmyadmin@localhost IDENTIFIED BY '$p'"
     cp -f $vestacp/pma/config.inc.conf /etc/phpMyAdmin/config.inc.php
-    sed -i "s/%blowfish_secret%/$(gen_pass 32)/g" /etc/phpMyAdmin/config.inc.php
+    sed -i "s/%blowfish_secret%/$blowfish_secret/g" /etc/phpMyAdmin/config.inc.php
     sed -i "s/%phpmyadmin_pass%/$p/g" /etc/phpMyAdmin/config.inc.php
     chmod 777 /var/lib/phpMyAdmin/temp
     chmod 777 /var/lib/phpMyAdmin/save

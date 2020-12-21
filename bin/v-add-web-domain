@@ -118,7 +118,7 @@ else
     else
         ALIAS="$aliases"
     fi
-    
+
     ip_alias=$(get_ip_alias $domain)
     if [ ! -z "$ip_alias" ]; then
         ALIAS="$ALIAS,$ip_alias"
@@ -137,7 +137,7 @@ if [ ! -z "$PROXY_SYSTEM" ]; then
     if [ -z "$proxy_ext" ]; then
         PROXY_EXT="jpg,jpeg,gif,png,ico,svg,css,zip,tgz,gz,rar,bz2,doc,xls"
         PROXY_EXT="$PROXY_EXT,exe,pdf,ppt,txt,odt,ods,odp,odf,tar,wav,bmp"
-        PROXY_EXT="$PROXY_EXT,rtf,js,mp3,avi,mpeg,flv,html,htm"
+        PROXY_EXT="$PROXY_EXT,rtf,js,mp3,avi,mpeg,flv,woff,woff2"
     fi
     add_web_config "$PROXY_SYSTEM" "$PROXY_TEMPLATE.tpl"
 fi
@@ -163,6 +163,9 @@ echo "DOMAIN='$domain' IP='$ip' IP6='' ALIAS='$ALIAS' TPL='$WEB_TEMPLATE'\
  BACKEND='$BACKEND_TEMPLATE' PROXY='$PROXY_TEMPLATE' PROXY_EXT='$PROXY_EXT'\
  STATS='' STATS_USER='' STATS_CRYPT='' U_DISK='0' U_BANDWIDTH='0'\
  SUSPENDED='no' TIME='$time' DATE='$date'" >> $USER_DATA/web.conf
+
+# Install unsigned SSL
+$BIN/v-install-unsigned-ssl "$domain" "no"
 
 # Restarting web server
 $BIN/v-restart-web $restart
