@@ -965,7 +965,7 @@ if [ -e '/etc/sysconfig/clock' ]; then
     source /etc/sysconfig/clock
 fi
 if [ -z "$ZONE" ]; then
-    ZONE='UTC'
+    ZONE='Europe/Istanbul'
 fi
 for pconf in $(find /etc/php* -name php.ini); do
     sed -i "s|;date.timezone =|date.timezone = $ZONE|g" $pconf

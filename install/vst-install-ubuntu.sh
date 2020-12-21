@@ -921,7 +921,7 @@ fi
 
 ZONE=$(timedatectl 2>/dev/null|grep Timezone|awk '{print $2}')
 if [ -z "$ZONE" ]; then
-    ZONE='UTC'
+    ZONE='Europe/Istanbul'
 fi
 for pconf in $(find /etc/php* -name php.ini); do
     sed -i "s%;date.timezone =%date.timezone = $ZONE%g" $pconf
