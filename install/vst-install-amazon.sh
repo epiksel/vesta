@@ -846,6 +846,10 @@ rm /tmp/vst.pem
 #----------------------------------------------------------#
 
 if [ "$nginx" = 'yes' ]; then
+    mkdir -p /etc/nginx/certs
+    # Generate dhparam certificate
+    openssl dhparam -out /etc/nginx/certs/dhparam.pem 4096
+
     rm -f /etc/nginx/conf.d/*.conf
     cp -f $vestacp/nginx/nginx.conf /etc/nginx/
     cp -f $vestacp/nginx/status.conf /etc/nginx/conf.d/
@@ -1183,7 +1187,7 @@ if [ "$exim" = 'yes' ] && [ "$mysql" = 'yes' ]; then
     chmod -f 777 /var/log/roundcubemail
     r="$(gen_pass)"
     mysql -e "CREATE DATABASE roundcube"
-    mysql -e "GRANT ALL ON roundcube.* TO 
+    mysql -e "GRANT ALL ON roundcube.* TO
             roundcube@localhost IDENTIFIED BY '$r'"
     sed -i "s/%password%/$r/g" /etc/roundcubemail/config.inc.php
     chmod 640 /etc/roundcubemail/config.inc.php

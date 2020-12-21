@@ -857,6 +857,10 @@ rm /tmp/vst.pem
 #----------------------------------------------------------#
 
 if [ "$nginx" = 'yes' ]; then
+    mkdir -p /etc/nginx/certs
+    # Generate dhparam certificate
+    openssl dhparam -out /etc/nginx/certs/dhparam.pem 4096
+
     rm -f /etc/nginx/conf.d/*.conf
     cp -f $vestacp/nginx/nginx.conf /etc/nginx/
     cp -f $vestacp/nginx/status.conf /etc/nginx/conf.d/
@@ -1160,7 +1164,7 @@ if [ "$exim" = 'yes' ] && [ "$mysql" = 'yes' ]; then
     cp -f $vestacp/roundcube/config.inc.php /etc/roundcube/plugins/password/
     r="$(gen_pass)"
     mysql -e "CREATE DATABASE roundcube"
-    mysql -e "GRANT ALL ON roundcube.* 
+    mysql -e "GRANT ALL ON roundcube.*
         TO roundcube@localhost IDENTIFIED BY '$r'"
     sed -i "s/%password%/$r/g" /etc/roundcube/db.inc.php
     sed -i "s/localhost/$servername/g" \
@@ -1227,7 +1231,7 @@ if [ "$fail2ban" = 'yes' ]; then
         fline=$(cat /etc/fail2ban/jail.local |grep -n vsftpd-iptables -A 2)
         fline=$(echo "$fline" |grep enabled |tail -n1 |cut -f 1 -d -)
         sed -i "${fline}s/false/true/" /etc/fail2ban/jail.local
-    fi 
+    fi
     update-rc.d fail2ban defaults
     service fail2ban start
     check_result $? "fail2ban start failed"
