@@ -1,0 +1,122 @@
+# Repository: http://rpms.remirepo.net/
+# Blog:       http://blog.remirepo.net/
+# Forum:      http://forum.remirepo.net/
+
+[remi-safe]
+name=Safe Remi's RPM repository for Enterprise Linux 7 - $basearch
+#baseurl=http://rpms.remirepo.net/enterprise/7/safe/$basearch/
+#mirrorlist=https://rpms.remirepo.net/enterprise/7/safe/httpsmirror
+mirrorlist=http://cdn.remirepo.net/enterprise/7/safe/mirror
+enabled=1
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-remi
+
+[remi-safe-debuginfo]
+name=Remi's RPM repository for Enterprise Linux 7 - $basearch - debuginfo
+baseurl=http://rpms.remirepo.net/enterprise/7/debug-remi/$basearch/
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-remi
+
+[remi]
+name=Remi's RPM repository for Enterprise Linux 7 - $basearch
+#baseurl=http://rpms.remirepo.net/enterprise/7/remi/$basearch/
+#mirrorlist=https://rpms.remirepo.net/enterprise/7/remi/httpsmirror
+mirrorlist=http://cdn.remirepo.net/enterprise/7/remi/mirror
+enabled=1
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-remi
+
+[remi-test]
+name=Remi's test RPM repository for Enterprise Linux 7 - $basearch
+#baseurl=http://rpms.remirepo.net/enterprise/7/test/$basearch/
+#mirrorlist=https://rpms.remirepo.net/enterprise/7/test/mirror
+mirrorlist=http://cdn.remirepo.net/enterprise/7/test/mirror
+# WARNING: If you enable this repository, you must also enable "remi"
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-remi
+
+[remi-debuginfo]
+name=Remi's RPM repository for Enterprise Linux 7 - $basearch - debuginfo
+baseurl=http://rpms.remirepo.net/enterprise/7/debug-remi/$basearch/
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-remi
+
+[remi-test-debuginfo]
+name=Remi's test RPM repository for Enterprise Linux 7 - $basearch - debuginfo
+baseurl=http://rpms.remirepo.net/enterprise/7/debug-test/$basearch/
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-remi
+
+# This repository only provides PHP 7.4 and its extensions
+# NOTICE: common dependencies are in "remi-safe"
+
+[remi-php74]
+name=Remi's PHP 7.4 RPM repository for Enterprise Linux 7 - $basearch
+#baseurl=http://rpms.remirepo.net/enterprise/7/php74/$basearch/
+#mirrorlist=https://rpms.remirepo.net/enterprise/7/php74/httpsmirror
+mirrorlist=http://cdn.remirepo.net/enterprise/7/php74/mirror
+enabled=1
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-remi
+
+[remi-php74-debuginfo]
+name=Remi's PHP 7.4 RPM repository for Enterprise Linux 7 - $basearch - debuginfo
+baseurl=http://rpms.remirepo.net/enterprise/7/debug-php74/$basearch/
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-remi
+
+[remi-php74-test]
+name=Remi's PHP 7.4 test RPM repository for Enterprise Linux 7 - $basearch
+#baseurl=http://rpms.remirepo.net/enterprise/7/test74/$basearch/
+#mirrorlist=https://rpms.remirepo.net/enterprise/7/test74/httpsmirror
+mirrorlist=http://cdn.remirepo.net/enterprise/7/test74/mirror
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-remi
+
+[remi-php74-test-debuginfo]
+name=Remi's PHP 7.4 test RPM repository for Enterprise Linux 7 - $basearch - debuginfo
+baseurl=http://rpms.remirepo.net/enterprise/7/debug-test74/$basearch/
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-remi
+
+# This repository only provides PHP 8.0 and its extensions
+# NOTICE: common dependencies are in "remi-safe"
+
+[remi-php80]
+name=Remi's PHP 8.0 RPM repository for Enterprise Linux 7 - $basearch
+#baseurl=http://rpms.remirepo.net/enterprise/7/php80/$basearch/
+#mirrorlist=https://rpms.remirepo.net/enterprise/7/php80/httpsmirror
+mirrorlist=http://cdn.remirepo.net/enterprise/7/php80/mirror
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-remi
+
+[remi-php80-debuginfo]
+name=Remi's PHP 8.0 RPM repository for Enterprise Linux 7 - $basearch - debuginfo
+baseurl=http://rpms.remirepo.net/enterprise/7/debug-php80/$basearch/
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-remi
+
+[remi-php80-test]
+name=Remi's PHP 8.0 test RPM repository for Enterprise Linux 7 - $basearch
+#baseurl=http://rpms.remirepo.net/enterprise/7/test80/$basearch/
+#mirrorlist=https://rpms.remirepo.net/enterprise/7/test80/httpsmirror
+mirrorlist=http://cdn.remirepo.net/enterprise/7/test80/mirror
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-remi
+
+[remi-php80-test-debuginfo]
+name=Remi's PHP 8.0 test RPM repository for Enterprise Linux 7 - $basearch - debuginfo
+baseurl=http://rpms.remirepo.net/enterprise/7/debug-test80/$basearch/
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-remi

@@ -459,17 +459,12 @@ check_result $? "Can't install EPEL repository"
 if [ "$remi" = 'yes' ] && [ ! -e "/etc/yum.repos.d/remi.repo" ]; then
     rpm -Uvh https://rpms.remirepo.net/enterprise/remi-release-$release.rpm
     check_result $? "Can't install REMI repository"
-    sed -i "s/enabled=0/enabled=1/g" /etc/yum.repos.d/remi.repo
-    sed -i "s/enabled=0/enabled=1/g" /etc/yum.repos.d/remi-php74.repo
 
-    # Deleting unnecessary Remi repository files
-    rm -f /etc/yum.repos.d/remi-g* >/dev/null 2>&1
-    rm -f /etc/yum.repos.d/remi-m* >/dev/null 2>&1
-    rm -f /etc/yum.repos.d/remi-php5* >/dev/null 2>&1
-    rm -f /etc/yum.repos.d/remi-php70* >/dev/null 2>&1
-    rm -f /etc/yum.repos.d/remi-php71* >/dev/null 2>&1
-    rm -f /etc/yum.repos.d/remi-php72* >/dev/null 2>&1
-    rm -f /etc/yum.repos.d/remi-php73* >/dev/null 2>&1
+    # Deleting Remi repository files
+    rm -f /etc/yum.repos.d/remi* >/dev/null 2>&1
+
+    # Re-Installing remi (safe, general, php74 and php8) repositories
+    wget -q "$EGITHUB/repos/remi.repo" -O /etc/yum.repos.d/remi.repo
 fi
 
 # Installing Nginx repository
