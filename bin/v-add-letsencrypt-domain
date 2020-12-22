@@ -233,8 +233,8 @@ done
 
 
 # Generating new ssl certificate
-ssl_dir=$($BIN/v-generate-ssl-cert "$domain" "info@$domain" "US" "California"\
-    "San Francisco" "Vesta" "IT" "$aliases" |tail -n1 |awk '{print $2}')
+ssl_dir=$($BIN/v-generate-ssl-cert "$domain" "admin@$domain" "TR" "Bursa"\
+    "Gemlik" "Vesta Control Panel" "IT" "$aliases" |tail -n1 |awk '{print $2}')
 
 # Sending CSR to finalize order / STEP 6
 csr=$(openssl req -in $ssl_dir/$domain.csr -outform DER |encode_base64)

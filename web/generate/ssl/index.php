@@ -12,9 +12,9 @@ if (!empty($_GET['domain'])) {
     $v_domain = 'example.ltd';
 }
 $v_email = 'admin@' . $v_domain;
-$v_country = 'US';
-$v_state = 'California';
-$v_locality = 'San Francisco';
+$v_country = 'TR';
+$v_state = 'Bursa';
+$v_locality = 'Gemlik';
 $v_org = 'MyCompany LLC';
 $v_org_unit = 'IT';
 

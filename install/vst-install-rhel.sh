@@ -437,7 +437,7 @@ sleep 5
 #----------------------------------------------------------#
 
 # Checking swap on small instances
-if [ -z "$(swapon -s)" ] && [ $memory -lt 3000000 ]; then
+if [ -z "$(swapon -s)" ] && [ $memory -lt 2000000 ]; then
     fallocate -l 2G /swapfile
     chmod 600 /swapfile
     mkswap /swapfile
@@ -846,8 +846,8 @@ cp -rf $vestacp/firewall $VESTA/data/
 $VESTA/bin/v-change-sys-hostname $servername 2>/dev/null
 
 # Generating SSL certificate
-$VESTA/bin/v-generate-ssl-cert $(hostname) $email 'US' 'California' \
-     'San Francisco' 'Vesta Control Panel' 'IT' > /tmp/vst.pem
+$VESTA/bin/v-generate-ssl-cert $(hostname) $email 'TR' 'Bursa' \
+     'Gemlik' 'Vesta Control Panel' 'IT' > /tmp/vst.pem
 
 # Parsing certificate file
 crt_end=$(grep -n "END CERTIFICATE-" /tmp/vst.pem |cut -f 1 -d:)
