@@ -60,7 +60,7 @@ fi
 
 # Check curl
 if [ -e '/usr/bin/curl' ]; then
-    curl -O https://v.epiksel.net/install/vst-install-$type.sh
+    curl -OL https://v.epiksel.net/install/vst-install-$type.sh
     if [ "$?" -eq '0' ]; then
         bash vst-install-$type.sh $*
         exit
