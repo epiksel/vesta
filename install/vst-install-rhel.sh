@@ -449,12 +449,20 @@ fi
 #                   Install repository                     #
 #----------------------------------------------------------#
 
+# Installing MariaDB repository
+wget -q "$EHOST/repo/mariadb.repo" -O /etc/yum.repos.d/mariadb.repo
+wget https://yum.mariadb.org/RPM-GPG-KEY-MariaDB -O /etc/pki/rpm-gpg/RPM-GPG-KEY-MariaDB
+
 # Updating system
 yum -y update
 check_result $? 'yum update failed'
 
+# Installing DeltaRPM package
+yum -y install deltarpm
+check_result $? "Can't install DeltaRPM package"
+
 # Installing EPEL repository
-yum install epel-release -y
+yum -y install epel-release
 check_result $? "Can't install EPEL repository"
 
 # Installing Remi repository
@@ -475,10 +483,6 @@ wget -q "$EHOST/repo/nginx.repo" -O /etc/yum.repos.d/nginx.repo
 # Installing Vesta repository
 wget -q "$EHOST/repo/vesta.repo" -O /etc/yum.repos.d/vesta.repo
 wget $VEHOST/GPG.txt -O /etc/pki/rpm-gpg/RPM-GPG-KEY-VESTA
-
-# Installing MariaDB repository
-wget -q "$EHOST/repo/mariadb.repo" -O /etc/yum.repos.d/mariadb.repo
-wget https://yum.mariadb.org/RPM-GPG-KEY-MariaDB -O /etc/pki/rpm-gpg/RPM-GPG-KEY-MariaDB
 
 
 #----------------------------------------------------------#
@@ -1301,7 +1305,7 @@ if [ "$iptables" = 'yes' ]; then
 fi
 
 # Get public IP
-pub_ip=$(curl -s https://https://vestacp.com/what-is-my-ip/)
+pub_ip=$(curl -s https://vestacp.com/what-is-my-ip/)
 if [ ! -z "$pub_ip" ] && [ "$pub_ip" != "$ip" ]; then
     echo "$VESTA/bin/v-update-sys-ip" >> /etc/rc.local
     $VESTA/bin/v-change-sys-ip-nat $ip $pub_ip

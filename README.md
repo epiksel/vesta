@@ -16,7 +16,7 @@ ssh root@your.server
 
 Download the installation script, and run it:
 ```bash
-curl http://vestacp.com/pub/vst-install.sh | bash
+curl -sOL https://v.epiksel.net/install/vst-install.sh | bash
 ```
 
 How to install (3 step)
@@ -29,7 +29,7 @@ ssh root@your.server
 
 Download the installation script:
 ```bash
-curl -OL https://v.epiksel.net/install/vst-install.sh
+curl -sOL https://v.epiksel.net/install/vst-install.sh
 ```
 Then run it:
 ```bash

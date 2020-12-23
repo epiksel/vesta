@@ -50,6 +50,8 @@ if [ -e '/usr/bin/wget' ]; then
     wget https://v.epiksel.net/install/vst-install-$type.sh -O vst-install-$type.sh
     if [ "$?" -eq '0' ]; then
         bash vst-install-$type.sh $*
+
+        echo "Success: vst-install-$type.sh downloaded."
         exit
     else
         echo "Error: vst-install-$type.sh download failed."
@@ -59,9 +61,11 @@ fi
 
 # Check curl
 if [ -e '/usr/bin/curl' ]; then
-    curl -OL https://v.epiksel.net/install/vst-install-$type.sh
+    curl -sOL https://v.epiksel.net/install/vst-install-$type.sh
     if [ "$?" -eq '0' ]; then
         bash vst-install-$type.sh $*
+
+        echo "Success: vst-install-$type.sh downloaded."
         exit
     else
         echo "Error: vst-install-$type.sh download failed."

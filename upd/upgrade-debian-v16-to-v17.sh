@@ -7,7 +7,7 @@ os='debian'
 release=$(cat /etc/debian_version|grep -o [0-9]|head -n1)
 codename="$(cat /etc/os-release |grep VERSION= |cut -f 2 -d \(|cut -f 1 -d \))"
 servername=$(hostname -f)
-GITHOST='$EHOST/install/$VERSION/$release'
+vestacp='$EHOST/install/$VERSION/$release'
 
 apt-get update > /dev/null 2>&1
 
@@ -134,4 +134,4 @@ if [ -f "/lib/systemd/system/clamav-daemon.service" ]; then
 fi
 
 # Dovecot logrorate script
-wget $GITHOST/logrotate/dovecot -O /etc/logrotate.d/dovecot
+wget $vestacp/logrotate/dovecot -O /etc/logrotate.d/dovecot
