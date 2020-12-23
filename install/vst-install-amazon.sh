@@ -1272,7 +1272,7 @@ if [ "$iptables" = 'yes' ]; then
 fi
 
 # Get public IP
-pub_ip=$(curl -s vestacp.com/what-is-my-ip/)
+pub_ip=$(curl -s https://vestacp.com/what-is-my-ip/)
 if [ ! -z "$pub_ip" ] && [ "$pub_ip" != "$ip" ]; then
     echo "$VESTA/bin/v-update-sys-ip" >> /etc/rc.local
     $VESTA/bin/v-change-sys-ip-nat $ip $pub_ip

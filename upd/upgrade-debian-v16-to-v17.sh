@@ -1,13 +1,13 @@
 #!/bin/bash
 
-CHOST='c.vestacp.com'
+EHOST='https://v.epiksel.net'
 VERSION='debian'
 VESTA='/usr/local/vesta'
 os='debian'
 release=$(cat /etc/debian_version|grep -o [0-9]|head -n1)
 codename="$(cat /etc/os-release |grep VERSION= |cut -f 2 -d \(|cut -f 1 -d \))"
-vestacp="http://$CHOST/$VERSION/$release"
 servername=$(hostname -f)
+GITHOST='$EHOST/install/$VERSION/$release'
 
 apt-get update > /dev/null 2>&1
 
@@ -29,7 +29,7 @@ fi
 
 if [ -f "/etc/roundcube/plugins/password/config.inc.php" ]; then
 
-    # Roundcube Vesta password driver - changing password_vesta_host (in config) to server hostname 
+    # Roundcube Vesta password driver - changing password_vesta_host (in config) to server hostname
     sed -i "s/localhost/$servername/g" /etc/roundcube/plugins/password/config.inc.php
 
     # Roundcube log permission fix
@@ -45,7 +45,7 @@ fi
 apt-get -y install expect > /dev/null 2>&1
 
 
-# apparmor rules for bind9 
+# apparmor rules for bind9
 if [ -f "/etc/bind/named.conf" ]; then
     file="/etc/apparmor.d/local/usr.sbin.named"
     if [ ! -f "$file" ] || [ $( grep -ic "/home/" $file ) -eq 0 ]; then
@@ -56,7 +56,7 @@ if [ -f "/etc/bind/named.conf" ]; then
 fi
 
 
-# Debian fix for spamassassin when it's not in startup list 
+# Debian fix for spamassassin when it's not in startup list
 if [[ $(systemctl list-unit-files | grep spamassassin) =~ "disabled" ]]; then
     systemctl enable spamassassin
 fi
@@ -64,7 +64,7 @@ fi
 
 # RoundCube tinyMCE fix
 if [ "$release" -eq '8' ]; then
-    tinymceFixArchiveURL=$vestacp/roundcube/roundcube-tinymce.tar.gz
+    tinymceFixArchiveURL=$EHOST/$VERSION/$release/roundcube/roundcube-tinymce.tar.gz
     tinymceParentFolder=/usr/share/roundcube/program/js
     tinymceFolder=$tinymceParentFolder/tinymce
     tinymceBadJS=$tinymceFolder/tiny_mce.js
@@ -88,7 +88,7 @@ fi
 
 # Fixing empty NAT ip
 ip=$(ip addr|grep 'inet '|grep global|head -n1|awk '{print $2}'|cut -f1 -d/)
-pub_ip=$(curl -s vestacp.com/what-is-my-ip/)
+pub_ip=$(curl -s https://vestacp.com/what-is-my-ip/)
 file="$VESTA/data/ips/$ip"
 if [ -f "$file" ] && [ $( grep -ic "NAT=''" $file ) -eq 1 ]; then
     if [ ! -z "$pub_ip" ] && [ "$pub_ip" != "$ip" ]; then
@@ -106,7 +106,7 @@ fi
 
 # Switching to mod_remoteip
 if [ ! -f "/etc/apache2/mods-enabled/remoteip.load" ]; then
-    $VESTA/upd/switch_rpath.sh 
+    $VESTA/upd/switch_rpath.sh
 fi
 
 
@@ -134,4 +134,4 @@ if [ -f "/lib/systemd/system/clamav-daemon.service" ]; then
 fi
 
 # Dovecot logrorate script
-wget $vestacp/logrotate/dovecot -O /etc/logrotate.d/dovecot
+wget $GITHOST/logrotate/dovecot -O /etc/logrotate.d/dovecot

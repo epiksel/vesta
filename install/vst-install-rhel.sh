@@ -6,9 +6,8 @@
 #                  Variables&Functions                     #
 #----------------------------------------------------------#
 export PATH=$PATH:/sbin
-RHOST='r.vestacp.com'
-CHOST='c.vestacp.com'
-EGITHUB='https://raw.githubusercontent.com/epiksel/vesta/master'
+VEHOST='https://c.vestacp.com'
+EHOST='https://v.epiksel.net'
 REPO='cmmnt'
 VERSION='rhel'
 VESTA='/usr/local/vesta'
@@ -257,7 +256,7 @@ if [ ! -e '/usr/bin/wget' ]; then
 fi
 
 # Checking repository availability
-wget -q "$CHOST/GPG.txt" -O /dev/null
+wget -q "$VEHOST/GPG.txt" -O /dev/null
 check_result $? "No access to Vesta repository"
 
 # Checking installed packages
@@ -467,18 +466,18 @@ if [ "$remi" = 'yes' ] && [ ! -e "/etc/yum.repos.d/remi.repo" ]; then
     rm -f /etc/yum.repos.d/remi* >/dev/null 2>&1
 
     # Re-Installing remi (safe, general, php74 and php8) repositories
-    wget -q "$EGITHUB/repos/remi.repo" -O /etc/yum.repos.d/remi.repo
+    wget -q "$EHOST/repo/remi.repo" -O /etc/yum.repos.d/remi.repo
 fi
 
 # Installing Nginx repository
-wget -q "$EGITHUB/repos/nginx.repo" -O /etc/yum.repos.d/nginx.repo
+wget -q "$EHOST/repo/nginx.repo" -O /etc/yum.repos.d/nginx.repo
 
 # Installing Vesta repository
-wget -q "$EGITHUB/repos/vesta.repo" -O /etc/yum.repos.d/vesta.repo
-wget $CHOST/GPG.txt -O /etc/pki/rpm-gpg/RPM-GPG-KEY-VESTA
+wget -q "$EHOST/repo/vesta.repo" -O /etc/yum.repos.d/vesta.repo
+wget $VEHOST/GPG.txt -O /etc/pki/rpm-gpg/RPM-GPG-KEY-VESTA
 
 # Installing MariaDB repository
-wget -q "$EGITHUB/repos/mariadb.repo" -O /etc/yum.repos.d/mariadb.repo
+wget -q "$EHOST/repo/mariadb.repo" -O /etc/yum.repos.d/mariadb.repo
 wget https://yum.mariadb.org/RPM-GPG-KEY-MariaDB -O /etc/pki/rpm-gpg/RPM-GPG-KEY-MariaDB
 
 
@@ -1302,7 +1301,7 @@ if [ "$iptables" = 'yes' ]; then
 fi
 
 # Get public IP
-pub_ip=$(curl -s vestacp.com/what-is-my-ip/)
+pub_ip=$(curl -s https://https://vestacp.com/what-is-my-ip/)
 if [ ! -z "$pub_ip" ] && [ "$pub_ip" != "$ip" ]; then
     echo "$VESTA/bin/v-update-sys-ip" >> /etc/rc.local
     $VESTA/bin/v-change-sys-ip-nat $ip $pub_ip

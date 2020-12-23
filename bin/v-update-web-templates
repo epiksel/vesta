@@ -22,7 +22,7 @@ source $VESTA/conf/vesta.conf
 #----------------------------------------------------------#
 
 # Defining config host
-chost='c.vestacp.com'
+EHOST='https://v.epiksel.net'
 
 # Detcing OS
 case $(head -n1 /etc/issue |cut -f 1 -d ' ') in
@@ -47,7 +47,7 @@ if [ "$version" = 'debian' ]; then
 fi
 
 # Defining download url
-vestacp="http://$chost/$version/$release"
+vestacp="$EHOST/$version/$release"
 
 # Downloading template archive
 cd $(mktemp -d)
