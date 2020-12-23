@@ -436,7 +436,7 @@ sleep 5
 #----------------------------------------------------------#
 
 # Checking swap on small instances
-if [ -z "$(swapon -s)" ] && [ $memory -lt 2000000 ]; then
+if [ -z "$(swapon -s)" ] && [ $memory -lt 1000000 ]; then
     fallocate -l 2G /swapfile
     chmod 600 /swapfile
     mkswap /swapfile
