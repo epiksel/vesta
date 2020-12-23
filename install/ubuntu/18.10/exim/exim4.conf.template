@@ -11,7 +11,6 @@
 add_environment = <; PATH=/bin:/usr/bin
 keep_environment =
 disable_ipv6 = true
-
 domainlist local_domains = dsearch;/etc/exim4/domains/
 domainlist relay_to_domains = dsearch;/etc/exim4/domains/
 hostlist relay_from_hosts = 127.0.0.1
@@ -24,6 +23,8 @@ acl_smtp_mail = acl_check_mail
 acl_smtp_rcpt = acl_check_rcpt
 acl_smtp_data = acl_check_data
 acl_smtp_mime = acl_check_mime
+
+smtp_banner = $smtp_active_hostname ESMTP Exim $tod_full
 
 .ifdef SPAMASSASSIN
 spamd_address = 127.0.0.1 783

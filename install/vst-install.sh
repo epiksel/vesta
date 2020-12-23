@@ -5,10 +5,9 @@
 #
 # Currently Supported Operating Systems:
 #
-#   RHEL 5, 6, 7
-#   CentOS 5, 6, 7
-#   Debian 7, 8
-#   Ubuntu 12.04 - 18.04
+#   RHEL/CentOS 7
+#   Debian 9
+#   Ubuntu 16.04 - 18.04
 #   Amazon Linux 2017
 #
 
