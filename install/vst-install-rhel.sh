@@ -450,8 +450,8 @@ fi
 #----------------------------------------------------------#
 
 # Installing MariaDB repository
-wget -q "$EHOST/repo/mariadb.repo" -O /etc/yum.repos.d/mariadb.repo
-wget https://yum.mariadb.org/RPM-GPG-KEY-MariaDB -O /etc/pki/rpm-gpg/RPM-GPG-KEY-MariaDB
+# wget -q "$EHOST/repo/mariadb.repo" -O /etc/yum.repos.d/mariadb.repo
+# wget https://yum.mariadb.org/RPM-GPG-KEY-MariaDB -O /etc/pki/rpm-gpg/RPM-GPG-KEY-MariaDB
 
 # Updating system
 yum -y update
@@ -640,10 +640,10 @@ yum install -y $software
 if [ $? -ne 0 ]; then
     if [ "$remi" = 'yes' ]; then
         yum -y --disablerepo=* \
-            --enablerepo="*base,*updates,nginx,epel,vesta,remi*,mariadb" \
+            --enablerepo="*base,*updates,nginx,epel,vesta,remi*" \
             install $software
     else
-        yum -y --disablerepo=* --enablerepo="*base,*updates,nginx,epel,vesta,mariadb" \
+        yum -y --disablerepo=* --enablerepo="*base,*updates,nginx,epel,vesta" \
             install $software
     fi
 fi
@@ -1369,6 +1369,9 @@ $VESTA/upd/add_notifications.sh
 # Adding cronjob for autoupdates
 $VESTA/bin/v-add-cron-vesta-autoupdate
 
+# Last updating system
+yum -y update
+check_result $? 'yum update failed'
 
 #----------------------------------------------------------#
 #                   Vesta Access Info                      #
